@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				font-size: 18px;
+				padding: 10px;
+			}
+			h4 {
+				margin: 0
+			}
+			.result {
+				margin-top: 10px;
+			}
+		</style>
+		<script defer id="myMathML" type="text/xsl">
+			<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+			   <xsl:output method="xml" indent="yes"/>
+	           <xsl:template match="/">
+	             <math xmlns="http://www.w3.org/1998/Math/MathML">
+	               <xsl:apply-templates />
+	             </math>
+	           </xsl:template>
+				<xsl:template match="корень">
+			      <msqrt>
+			         <xsl:apply-templates select="*"/>
+			      </msqrt>
+			   </xsl:template>
+			   <xsl:template match="строка">
+			      <mrow>
+			         <xsl:apply-templates select="*"/>
+			      </mrow>
+			   </xsl:template>
+			   <xsl:template match="операнд">
+			      <mi>
+			         <xsl:value-of select="." />
+			      </mi>
+			   </xsl:template>
+			   <xsl:template match="оператор">
+			      <mo>
+			         <xsl:value-of select="." />
+			      </mo>
+			   </xsl:template>
+			   <xsl:template match="число">
+			      <mn>
+			         <xsl:value-of select="." />
+			      </mn>
+			   </xsl:template>
+			   <xsl:template match="дробь">
+			      <mfrac>
+			         <xsl:apply-templates select="*"/>
+			      </mfrac>
+			   </xsl:template>
+			   <xsl:template match="низверх">
+			      <munderover>
+			         <xsl:apply-templates select="*"/>
+			      </munderover>
+			   </xsl:template>
+			   <xsl:template match="верх">
+			      <msup>
+			         <xsl:apply-templates select="*"/>
+			      </msup>
+			   </xsl:template>
+			   <xsl:template match="низ">
+			      <msub>
+			         <xsl:apply-templates select="*"/>
+			      </msub>
+			   </xsl:template>
+			</xsl:stylesheet>
+		</script>
+		<script defer id="mySVG" type="text/xsl">
+			<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+			  <xsl:output method="xml"/>
+			  <xsl:template match="root">
+			    <svg width="{графика/@ширина}" height="{графика/@высота}">
+			      <xsl:apply-templates select="графика/эллипс"/>
+			    </svg>
+			  </xsl:template>
+			  <xsl:template match="эллипс">
+			    <ellipse id="{@id}" fill="white" stroke="{@ободок}" stroke-width="{@ширина-ободка}" fill="{white}"cx="{@cx}" cy="{@cy}" rx="{@rx}" ry="{@ry}"/>
+			  </xsl:template>
+			</xsl:stylesheet>
+		</script>
+		<script defer id="mathML" type="text/xml"><строка>
+			 <операнд>σ</операнд>
+			 <оператор>=</оператор>
+			 <корень>
+				 <строка>
+					 <дробь>
+						 <строка>
+							 <число>1</число>
+						</строка>
+						<строка>
+							 <операнд>N</операнд>
+						 </строка>
+					 </дробь>
+					 <строка>
+						 <низверх>
+							 <строка>
+								 <оператор>∑</оператор>
+							</строка>
+							<строка>
+								 <операнд>i</операнд>
+								 <оператор>=</оператор>
+								 <число>1</число>
+							</строка>
+							<строка>
+								 <операнд>N</операнд>
+							 </строка>
+						 </низверх>
+						 <строка>
+							 <верх>
+								 <строка>
+									 <оператор >(</оператор>
+									 <низ>
+										 <строка>
+										 <операнд>x</операнд>
+										 </строка>
+										 <строка>
+										 <операнд>i</операнд>
+										 </строка>
+									 </низ>
+									 <оператор>−</оператор>
+									 <операнд>μ</операнд>
+									 <оператор >)</оператор>
+								 </строка>
+								 <строка>
+								 	<число>2</число>
+								 </строка>
+							 </верх>
+						 </строка>
+					 </строка>	
+				 </строка>
+			 </корень>
+			 <оператор>.</оператор>
+			</строка>
+		</script>
+		<script defer id="SVG" type="text/xml">
+			<root>
+			 <графика ширина="640" высота="480">
+			 	<эллипс id="графика_1" заливка="rgba(255,0,0,0.5)" ободок="white" ширина-ободка="5" cx="206" cy="139" rx="100" ry="100"/>
+			 	<эллипс id="графика_2" заливка="rgba(0,0,255,0.5)" ободок="white" ширина-ободка="5" cx="108" cy="111" rx="100" ry="100"/>
+			 	<эллипс id="графика_3" заливка="rgba(0,255,0,0.5)" ободок="white" ширина-ободка="5" cx="134" cy="215" rx="100" ry="100"/>
+			 </графика>
+			</root>
+		</script>
+		<script defer>
+			function f(id) {
+				let xml = document.getElementById(id).textContent;
+				document.getElementById('textarea').value = xml;
+
+			}
+
+			function transform() {
+				let checkboxes = document.getElementsByClassName('checkbox');
+				let checkbox = ''
+				  for (let index = 0; index < checkboxes.length; index++) {
+				     if (checkboxes[index].checked) {
+				        checkbox = checkboxes[index].value
+				        break
+				    }
+				}
+
+				let xmlID;
+				if (checkbox === 'mathML') {
+					xmlID = 'myMathML'
+				} else if (checkbox === 'SVG') {
+					xmlID = 'mySVG'
+				} else {
+					alert('Выбери чекбокс!!!')
+				}
+
+				const xslt = document.getElementById(xmlID).textContent;
+				const parser = new DOMParser();
+				const xsltNode = parser.parseFromString(xslt, 'text/xml');
+				const xsltProcessor = new XSLTProcessor();
+				xsltProcessor.importStylesheet(xsltNode);
+				const xmlString = document.getElementById(checkbox).textContent;
+				const xmlDocument = parser.parseFromString(xmlString, 'text/xml');
+				const string = new XMLSerializer().serializeToString(
+					xsltProcessor.transformToDocument(xmlDocument),
+				);
+
+				document.getElementById('result').innerHTML = string;
+			}
+		</script>
+	</head>
+	<body>
+		<h4 id="author">Егор Томилин</h4>
+		<br />
+		<p2>Выберите:</p2><br>
+		<div>
+			<input onClick="f('mathML')" class="checkbox" type="radio" name="fav_language" id="mathML" value="mathML">mathML</input><br>
+			<input onClick="f('SVG')" class="checkbox" type="radio" name="fav_language" id="SVG" value="SVG">SVG</input>
+		</div>
+		<div>
+			<button onclick="transform()">Преобразовать</button><br />
+		</div>
+		<div class="result" id="result"></div>
+	</body>
+</html>
