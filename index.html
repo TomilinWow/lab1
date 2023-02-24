@@ -19,11 +19,11 @@
 		<script defer id="myMathML" type="text/xsl">
 			<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 			   <xsl:output method="xml" indent="yes"/>
-	           <xsl:template match="/">
-	             <math xmlns="http://www.w3.org/1998/Math/MathML">
-	               <xsl:apply-templates />
-	             </math>
-	           </xsl:template>
+				<xsl:template match="/">
+				 <math xmlns="http://www.w3.org/1998/Math/MathML">
+				   <xsl:apply-templates />
+				 </math>
+			    </xsl:template>
 				<xsl:template match="корень">
 			      <msqrt>
 			         <xsl:apply-templates select="*"/>
@@ -80,84 +80,85 @@
 			    </svg>
 			  </xsl:template>
 			  <xsl:template match="эллипс">
-			    <ellipse id="{@id}" fill="white" stroke="{@ободок}" stroke-width="{@ширина-ободка}" fill="{white}"cx="{@cx}" cy="{@cy}" rx="{@rx}" ry="{@ry}"/>
+			    <ellipse id="{@id}" fill="{@заливка}" stroke="{@ободок}" stroke-width="{@ширина-ободка}" cx="{@cx}" cy="{@cy}" rx="{@rx}" ry="{@ry}"/>
 			  </xsl:template>
 			</xsl:stylesheet>
 		</script>
-		<script defer id="mathML" type="text/xml"><строка>
-			 <операнд>σ</операнд>
-			 <оператор>=</оператор>
-			 <корень>
-				 <строка>
-					 <дробь>
-						 <строка>
-							 <число>1</число>
-						</строка>
+		<script defer id="mathML" type="text/xml">
+			<строка>
+				<операнд>σ</операнд>
+				<оператор>=</оператор>
+				<корень>
+					<строка>
+						<дробь>
+							<строка>
+								<число>1</число>
+							</строка>
+							<строка>
+								<операнд>N</операнд>
+							</строка>
+						</дробь>
 						<строка>
-							 <операнд>N</операнд>
-						 </строка>
-					 </дробь>
-					 <строка>
-						 <низверх>
-							 <строка>
-								 <оператор>∑</оператор>
-							</строка>
+							<низверх>
+								<строка>
+									<оператор>∑</оператор>
+								</строка>
+								<строка>
+									<операнд>i</операнд>
+									<оператор>=</оператор>
+									<число>1</число>
+								</строка>
+								<строка>
+									<операнд>N</операнд>
+								</строка>
+							</низверх>
 							<строка>
-								 <операнд>i</операнд>
-								 <оператор>=</оператор>
-								 <число>1</число>
+								<верх>
+									<строка>
+										<оператор >(</оператор>
+										<низ>
+											<строка>
+												<операнд>x</операнд>
+											</строка>
+											<строка>
+												<операнд>i</операнд>
+											</строка>
+										</низ>
+										<оператор>−</оператор>
+										<операнд>μ</операнд>
+										<оператор >)</оператор>
+									</строка>
+									<строка>
+										<число>2</число>
+									</строка>
+								</верх>
 							</строка>
-							<строка>
-								 <операнд>N</операнд>
-							 </строка>
-						 </низверх>
-						 <строка>
-							 <верх>
-								 <строка>
-									 <оператор >(</оператор>
-									 <низ>
-										 <строка>
-										 <операнд>x</операнд>
-										 </строка>
-										 <строка>
-										 <операнд>i</операнд>
-										 </строка>
-									 </низ>
-									 <оператор>−</оператор>
-									 <операнд>μ</операнд>
-									 <оператор >)</оператор>
-								 </строка>
-								 <строка>
-								 	<число>2</число>
-								 </строка>
-							 </верх>
-						 </строка>
-					 </строка>	
-				 </строка>
-			 </корень>
-			 <оператор>.</оператор>
+						</строка>
+					</строка>
+				</корень>
+				<оператор>.</оператор>
 			</строка>
 		</script>
 		<script defer id="SVG" type="text/xml">
 			<root>
-			 <графика ширина="640" высота="480">
-			 	<эллипс id="графика_1" заливка="rgba(255,0,0,0.5)" ободок="white" ширина-ободка="5" cx="206" cy="139" rx="100" ry="100"/>
-			 	<эллипс id="графика_2" заливка="rgba(0,0,255,0.5)" ободок="white" ширина-ободка="5" cx="108" cy="111" rx="100" ry="100"/>
-			 	<эллипс id="графика_3" заливка="rgba(0,255,0,0.5)" ободок="white" ширина-ободка="5" cx="134" cy="215" rx="100" ry="100"/>
-			 </графика>
+				<графика ширина="640" высота="480">
+					<эллипс id="графика_1" заливка="rgba(255,0,0,0.5)" ободок="white" ширина-ободка="5" cx="206" cy="139" rx="100" ry="100"/>
+					<эллипс id="графика_2" заливка="rgba(0,0,255,0.5)" ободок="white" ширина-ободка="5" cx="108" cy="111" rx="100" ry="100"/>
+					<эллипс id="графика_3" заливка="rgba(0,255,0,0.5)" ободок="white" ширина-ободка="5" cx="134" cy="215" rx="100" ry="100"/>
+				</графика>
 			</root>
 		</script>
 		<script defer>
-
 			function transform() {
 				let checkboxes = document.getElementsByClassName('checkbox');
 				let checkbox = ''
-				  for (let index = 0; index < checkboxes.length; index++) {
-				     if (checkboxes[index].checked) {
-				        checkbox = checkboxes[index].value
-				        break
-				    }
+				for (let index = 0; index < checkboxes.length; index++) {
+					if (checkboxes[index].checked) {
+						checkbox = checkboxes[index].value
+						break
+					}
 				}
+
 
 				let xmlID;
 				if (checkbox === 'mathML') {
@@ -176,7 +177,7 @@
 				const xmlString = document.getElementById(checkbox).textContent;
 				const xmlDocument = parser.parseFromString(xmlString, 'text/xml');
 				const string = new XMLSerializer().serializeToString(
-					xsltProcessor.transformToDocument(xmlDocument),
+						xsltProcessor.transformToDocument(xmlDocument),
 				);
 
 				document.getElementById('result').innerHTML = string;
@@ -184,16 +185,15 @@
 		</script>
 	</head>
 	<body>
-		<h1 id="author">Егор Томилин p4109</h1>
+		<h1 id="author">Егор Томилин|p4109</h1>
 		<br />
 		<p2>Выберите:</p2><br>
 		<div>
 			<input class="checkbox" type="radio" name="229" id="mathML" value="mathML">mathML</input><br>
 			<input class="checkbox" type="radio" name="229" id="SVG" value="SVG">SVG</input>
 		</div>
-		<div>
-			<button onclick="transform()">Преобразовать</button><br />
-		</div>
+		<div><button onclick="transform()">Преобразовать</button><br /></div>
 		<div class="result" id="result"></div>
 	</body>
 </html>
+
