@@ -73,7 +73,7 @@
 		</script>
 		<script defer id="mySVG" type="text/xsl">
 			<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-			  <xsl:output method="xml"/>
+			  <xsl:output method="xml" indent="yes"/>
 			  <xsl:template match="root">
 			    <svg width="{графика/@ширина}" height="{графика/@высота}">
 			      <xsl:apply-templates select="графика/эллипс"/>
