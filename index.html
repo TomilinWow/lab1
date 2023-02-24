@@ -148,11 +148,6 @@
 			</root>
 		</script>
 		<script defer>
-			function f(id) {
-				let xml = document.getElementById(id).textContent;
-				document.getElementById('textarea').value = xml;
-
-			}
 
 			function transform() {
 				let checkboxes = document.getElementsByClassName('checkbox');
@@ -189,12 +184,12 @@
 		</script>
 	</head>
 	<body>
-		<h4 id="author">Егор Томилин</h4>
+		<h1 id="author">Егор Томилин p4109</h1>
 		<br />
 		<p2>Выберите:</p2><br>
 		<div>
-			<input onClick="f('mathML')" class="checkbox" type="radio" name="fav_language" id="mathML" value="mathML">mathML</input><br>
-			<input onClick="f('SVG')" class="checkbox" type="radio" name="fav_language" id="SVG" value="SVG">SVG</input>
+			<input class="checkbox" type="radio" name="229" id="mathML" value="mathML">mathML</input><br>
+			<input class="checkbox" type="radio" name="229" id="SVG" value="SVG">SVG</input>
 		</div>
 		<div>
 			<button onclick="transform()">Преобразовать</button><br />
