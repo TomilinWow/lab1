@@ -9,6 +9,12 @@
 				font-size: 18px;
 				padding: 10px;
 			}
+			.input {
+				width: 50%;
+				height: 200px;
+				margin-bottom: 20px;
+				padding: 10px;
+			}
 			h4 {
 				margin: 0
 			}
@@ -149,6 +155,13 @@
 			</root>
 		</script>
 		<script defer>
+
+			function f(id) {
+				let xml = document.getElementById(id).textContent;
+				document.getElementById('textarea').value = xml;
+
+			}
+
 			function transform() {
 				let checkboxes = document.getElementsByClassName('checkbox');
 				let checkbox = ''
@@ -174,7 +187,7 @@
 				const xsltNode = parser.parseFromString(xslt, 'text/xml');
 				const xsltProcessor = new XSLTProcessor();
 				xsltProcessor.importStylesheet(xsltNode);
-				const xmlString = document.getElementById(checkbox).textContent;
+				const xmlString = document.getElementById('textarea').value;
 				const xmlDocument = parser.parseFromString(xmlString, 'text/xml');
 				const string = new XMLSerializer().serializeToString(
 						xsltProcessor.transformToDocument(xmlDocument),
@@ -189,9 +202,10 @@
 		<br />
 		<p2>Выберите:</p2><br>
 		<div>
-			<input class="checkbox" type="radio" name="229" id="mathML" value="mathML">mathML</input><br>
-			<input class="checkbox" type="radio" name="229" id="SVG" value="SVG">SVG</input>
+			<input onClick="f('mathML')" class="checkbox" type="radio" name="fav_language" id="mathML" value="mathML">mathML</input><br>
+			<input onClick="f('SVG')" class="checkbox" type="radio" name="fav_language" id="SVG" value="SVG">SVG</input>
 		</div>
+		<textarea id="textarea" rows="10" cols="50" class="input"></textarea>
 		<div><button onclick="transform()">Преобразовать</button><br /></div>
 		<div class="result" id="result"></div>
 	</body>
